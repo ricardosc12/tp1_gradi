@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #830eff;
+    --text-primary: #4a4c4f;
+    --text-primary2: #6a4494;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Inter";
+}
+
+html, body {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#root {
+    height: 100%;
+}
+
+.icon {
+    color: var(--primary);
+    font-size: 1.4rem;
+}
