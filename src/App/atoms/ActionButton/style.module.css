@@ -1,0 +1,42 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: var(--roxinho);
+}
+
+.root > svg {
+    color: var(--primary);
+    font-size: 12px;
+}
+
+.root[class*="small"] {
+    width: 22px;
+    height: 22px;
+    border-radius: 22px;
+}
+.root[class*="small"] > svg {
+    font-size: 12px;
+}
+
+.root[class*="large"] {
+    width: 27px;
+    height: 27px;
+    border-radius: 27px;
+}
+
+.root[class*="verdinho"] {
+    background-color: var(--verdinho);
+}
+.root[class*="verdinho"] > svg {
+    color: var(--verde-dark);
+}
+.root[class*="vermelhinho"] {
+    background-color: var(--vermelhinho);
+}
+.root[class*="vermelhinho"] > svg {
+    color: var(--vermelho-dark);
+}

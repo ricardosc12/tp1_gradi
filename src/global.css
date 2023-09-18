@@ -4,10 +4,23 @@
 
 :root {
     --primary: #830eff;
+    --roxinho: #d3b1f8;
+    --roxinho-hover: #ddc7f5;
+    --primary-hover: #9e4ff3;
+    --primary-focus: #5b00bd;
     --text-primary: #4a4c4f;
     --text-primary2: #6a4494;
     --sidebar-width: 145px;
     --paper: #f7f4f8;
+    --background: #f0f0fa80;
+    --background-dark: #e7e7f180;
+
+    --verde: #5dff80;
+    --verde-dark: #188d31;
+    --verdinho: #a3ffb7;
+    --vermelho: #ff3232;
+    --vermelho-dark: #7c0f0f;
+    --vermelhinho: #ff9595;
 }
 
 * {
@@ -38,13 +51,31 @@ h1,h2,h3,h4,h5,p {
     color: var(--text-primary);
 }
 h1 {
-    color: var(--text-primary);
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 500 !important;
+    font-size: 20px !important;
 }
-.paper {
+h2 {
+    font-weight: 500 !important;
+    font-size: 18px !important;
+}
+h3 {
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+h5 {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+p {
+    font-size: 12px !important;
+}
+.paper-sm, .paper {
     padding: 8px;
-    background-color: var(--paper);
+    background-color: var(--background-dark);
     box-shadow: 0x 5px 8px rgba(150, 150, 180, .2);
     border-radius: 7px;
+}
+
+.paper {
+    padding: 12px;
 }

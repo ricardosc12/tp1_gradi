@@ -5,15 +5,18 @@ import {
     createSolidTable,
     SortingState,
     getSortedRowModel,
-    ColumnDefBase
+    RowSelectionState,
+    OnChangeFn
 } from '@tanstack/solid-table'
 import { createSignal, For } from 'solid-js'
 import { ArrowIcon } from '../../../assets/icons'
 import style from './style.module.css'
 
 interface TableProps {
-    data: any,
-    columns: ColumnDef<any>[]
+    data: any;
+    columns: ColumnDef<any>[];
+    rowSelection?: Function;
+    setRowSelection?: OnChangeFn<RowSelectionState>
 }
 
 export default function Table(props: TableProps) {
@@ -26,7 +29,12 @@ export default function Table(props: TableProps) {
             get sorting() {
                 return sorting()
             },
+            get rowSelection() {
+                return props.rowSelection()
+            }
         },
+        onRowSelectionChange: props.setRowSelection,
+        enableRowSelection: true,
         onSortingChange: setSorting,
         columns: props.columns || [],
         getCoreRowModel: getCoreRowModel(),

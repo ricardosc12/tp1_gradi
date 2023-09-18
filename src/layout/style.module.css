@@ -36,9 +36,10 @@
 .header {
     width: 100%;
     padding: 5px 10px;
-    background-color: var(--paper);
-    color: var(--text-primary2);
+    background-color: var(--background-dark);
+    color: var(--text-primary);
     font-size: 12px;
     box-shadow: 0x 5px 8px rgba(150, 150, 180, .2);
     border-radius: 7px;
+    font-weight: 500;
 }

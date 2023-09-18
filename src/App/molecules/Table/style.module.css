@@ -2,7 +2,7 @@
     margin-left: -8px;
 }
 .table > thead {
-    background-color: var(--paper);
+    background-color: var(--background-dark);
     margin-bottom: 20px;
 }
 .table > thead > tr > th {
@@ -50,17 +50,17 @@
 
 
 .icon_sort {
-    transform: translate(-1px, -13px);
+    transform: translate(5px, -6px);
     max-height: 10px;
-    max-width: 10px;
+    max-width: 15px;
 }
 
 .icon_sort > svg {
-    font-size: 30px;
+    /* font-size: 30px; */
     color: var(--text-primary);
-    transform: scale(0.45, 0.45) translateY(-50px);
+    transform: scale(1.1, 1.1) translateY(-6px);
 }
 
 .icon_sort > svg:nth-child(1) {
-    transform: scale(0.45, 0.45) rotate(180deg);
+    transform: scale(1.1, 1.1) rotate(180deg);
 }
