@@ -3,124 +3,59 @@ import {
     getCoreRowModel,
     ColumnDef,
     createSolidTable,
-    SortingState
+    SortingState,
+    getSortedRowModel,
+    ColumnDefBase
 } from '@tanstack/solid-table'
 import { createSignal, For } from 'solid-js'
+import { ArrowIcon } from '../../../assets/icons'
+import style from './style.module.css'
 
-type Person = {
-    firstName: string
-    lastName: string
-    age: number
-    visits: number
-    status: string
-    progress: number
+interface TableProps {
+    data: any,
+    columns: ColumnDef<any>[]
 }
 
-const defaultData = [
-    {
-        firstName: 'tanner',
-        lastName: 'linsley',
-        age: 24,
-        visits: 100,
-        status: 'In Relationship',
-        progress: 50,
-    },
-    {
-        firstName: 'tandy',
-        lastName: 'miller',
-        age: 40,
-        visits: 40,
-        status: 'Single',
-        progress: 80,
-    },
-    {
-        firstName: 'joe',
-        lastName: 'dirte',
-        age: 45,
-        visits: 20,
-        status: 'Complicated',
-        progress: 10,
-    },
-]
+export default function Table(props: TableProps) {
 
-const defaultColumns: ColumnDef<Person>[] = [
-    {
-        accessorKey: 'firstName',
-        cell: info => info.getValue(),
-    },
-    {
-        accessorFn: row => row.lastName,
-        id: 'lastName',
-        cell: info => info.getValue(),
-        header: () => <span>Last Name</span>,
-    },
-    {
-        accessorKey: 'age',
-        header: () => 'Age',
-    },
-    {
-        accessorKey: 'visits',
-        header: () => <span>Visits</span>,
-    },
-    {
-        accessorKey: 'status',
-        header: () => <span class='text-left'>Status</span>,
-    },
-    {
-        accessorKey: 'progress',
-        header: 'Profile Progress',
-    },
-]
-
-export default function Table(props) {
-
-    const [data, setData] = createSignal(defaultData)
     const [sorting, setSorting] = createSignal<SortingState>([])
 
     const table = createSolidTable({
-        get data() {
-            return data()
-        },
+        data: props.data || [],
         state: {
-            sorting: sorting()
+            get sorting() {
+                return sorting()
+            },
         },
         onSortingChange: setSorting,
-        columns: defaultColumns,
+        columns: props.columns || [],
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         columnResizeMode: 'onChange'
     })
 
     return (
         <div class="p-2">
-            <table style={{ width: `${table.getCenterTotalSize()}px` }}>
+            <table class={style.table} style={{ width: `${table.getCenterTotalSize()}px` }}>
                 <thead>
                     <For each={table.getHeaderGroups()}>
                         {headerGroup => (
                             <tr>
                                 <For each={headerGroup.headers}>
                                     {header => (
-
-                                        <th class='text-left' style={{ width: `${header.getSize()}px` }}>
-                                            <div
-                                                {...{
-                                                    class: header.column.getCanSort()
-                                                        ? 'cursor-pointer select-none'
-                                                        : '',
-                                                    onClick: header.column.getToggleSortingHandler(),
-                                                }}
-                                            ></div>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-                                            {{
-                                                asc: ' 🔼',
-                                                desc: ' 🔽',
-                                            }[header.column.getIsSorted() as string] ?? null}
+                                        <th class='text-left select-none' style={{ width: `${header.getSize()}px` }} onClick={header.column.getToggleSortingHandler()}>
+                                            <div class='flex items-center text'>
+                                                {header.isPlaceholder
+                                                    ? null
+                                                    : flexRender(
+                                                        header.column.columnDef.header,
+                                                        header.getContext()
+                                                    )}
+                                                <Icon sort={header.column.getIsSorted()} />
+                                            </div>
                                         </th>
-                                    )}
+                                    )
+                                    }
                                 </For>
                             </tr>
                         )}
@@ -145,6 +80,15 @@ export default function Table(props) {
                     </For>
                 </tbody>
             </table>
+        </div>
+    )
+}
+
+const Icon = (props) => {
+    return (
+        <div class={style.icon_sort}>
+            <ArrowIcon class={props.sort == 'desc' ? "opacity-0" : ''} />
+            <ArrowIcon class={props.sort == 'asc' ? "opacity-0" : ''} />
         </div>
     )
 }

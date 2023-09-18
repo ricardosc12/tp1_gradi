@@ -1,0 +1,66 @@
+.table {
+    margin-left: -8px;
+}
+.table > thead {
+    background-color: var(--paper);
+    margin-bottom: 20px;
+}
+.table > thead > tr > th {
+    padding: 4px 16px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 14px;
+}
+.table > thead > tr > th:last-child {
+    padding-right: 22px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.table > thead > tr > th:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.table > tbody > tr > td {
+    padding: 4px 16px;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+.table > tbody > tr:first-child > td {
+    padding-top: 10px;
+}
+.table > tbody > tr:nth-child(2n) {
+    background-color: rgba(240,240,250,.5);
+}
+.table > tbody > tr > td:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.table > tbody > tr > td:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.table > tbody > tr:hover {
+    background-color: rgba(240,240,250,.55);
+}
+.table > thead > tr > th > div {
+    text-wrap: nowrap;
+}
+
+
+
+
+.icon_sort {
+    transform: translate(-1px, -13px);
+    max-height: 10px;
+    max-width: 10px;
+}
+
+.icon_sort > svg {
+    font-size: 30px;
+    color: var(--text-primary);
+    transform: scale(0.45, 0.45) translateY(-50px);
+}
+
+.icon_sort > svg:nth-child(1) {
+    transform: scale(0.45, 0.45) rotate(180deg);
+}

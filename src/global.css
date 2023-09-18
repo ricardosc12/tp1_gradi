@@ -7,6 +7,7 @@
     --text-primary: #4a4c4f;
     --text-primary2: #6a4494;
     --sidebar-width: 145px;
+    --paper: #f7f4f8;
 }
 
 * {
@@ -43,7 +44,7 @@ h1 {
 }
 .paper {
     padding: 8px;
-    background-color: #ecebee;
+    background-color: var(--paper);
     box-shadow: 0x 5px 8px rgba(150, 150, 180, .2);
     border-radius: 7px;
 }
