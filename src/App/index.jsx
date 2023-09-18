@@ -6,6 +6,7 @@ import Home from "./organisms/Home";
 import Dashboard from "./organisms/Dashboard";
 import Integracoes from "./organisms/Integracoes";
 import { StoreProvider } from "./store";
+import Header from "../layout/header";
 
 export const routes = [
     { path: '/home', icon: HomeIcon, tilte: "Home", import: Home },
@@ -18,15 +19,18 @@ export default function App() {
         <StoreProvider>
             <div class="h-full flex">
                 <Sidebar />
-                <main>
-                    <Routes>
-                        <For each={routes}>
-                            {route => (
-                                <Route path={route.path} component={route.import} />
-                            )}
-                        </For>
-                    </Routes>
-                </main>
+                <div class="main">
+                    <Header />
+                    <main>
+                        <Routes>
+                            <For each={routes}>
+                                {route => (
+                                    <Route path={route.path} component={route.import} />
+                                )}
+                            </For>
+                        </Routes>
+                    </main>
+                </div>
             </div>
         </StoreProvider>
     )

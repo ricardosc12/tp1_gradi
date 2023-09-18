@@ -6,6 +6,7 @@
     --primary: #830eff;
     --text-primary: #4a4c4f;
     --text-primary2: #6a4494;
+    --sidebar-width: 145px;
 }
 
 * {
@@ -26,4 +27,23 @@ html, body {
 .icon {
     color: var(--primary);
     font-size: 1.4rem;
+}
+
+.main {
+    width: calc(100% - var(--sidebar-width));
+    padding: 10px 15px;
+}
+h1,h2,h3,h4,h5,p {
+    color: var(--text-primary);
+}
+h1 {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 20px;
+}
+.paper {
+    padding: 8px;
+    background-color: #ecebee;
+    box-shadow: 0x 5px 8px rgba(150, 150, 180, .2);
+    border-radius: 7px;
 }

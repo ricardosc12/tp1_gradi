@@ -31,3 +31,14 @@
 .sidebar [class*="active_route"]>svg {
     color: rgb(238, 239, 247);
 }
+
+
+.header {
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #ecebee;
+    color: var(--text-primary2);
+    font-size: 12px;
+    box-shadow: 0x 5px 8px rgba(150, 150, 180, .2);
+    border-radius: 7px;
+}
