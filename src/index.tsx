@@ -7,6 +7,7 @@ import { HopeProvider } from '@hope-ui/solid';
 import { themeConfig } from './theme';
 import { StoreProvider } from './App/store';
 
+
 const root = document.getElementById('root');
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
