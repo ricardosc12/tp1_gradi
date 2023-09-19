@@ -1,40 +1,43 @@
 import Sidebar from "../layout/sidebar";
-import { DashIcon, HomeIcon, UploadIcon } from '../assets/icons'
+import { HomeIcon, UploadIcon } from '../assets/icons'
 import { Route, Routes } from "@solidjs/router";
-import { For } from "solid-js";
-import Home from "./organisms/Home";
-import Dashboard from "./organisms/Dashboard";
+import { For, onMount } from "solid-js";
+import Home, { defaultData } from "./organisms/Home";
 import Integracoes from "./organisms/Integracoes";
-import { StoreProvider } from "./store";
+import { useStore } from "./store";
 import Header from "../layout/header";
 import { NotificationsProvider } from "@hope-ui/solid";
 
 export const routes = [
     { path: '/home', icon: HomeIcon, tilte: "Home", import: Home },
-    { path: '/dashboard', icon: DashIcon, tilte: "Dashboard", import: Dashboard },
     { path: '/integracoes', icon: UploadIcon, tilte: "Integrações", import: Integracoes }
 ]
 
 export default function App() {
+
+    const [_, { setTransacao }] = useStore()
+
+    onMount(() => {
+        setTransacao(defaultData)
+    })
+
     return (
-        <StoreProvider>
-            <NotificationsProvider>
-                <div class="h-full flex">
-                    <Sidebar />
-                    <div class="main">
-                        <Header />
-                        <main>
-                            <Routes>
-                                <For each={routes}>
-                                    {route => (
-                                        <Route path={route.path} component={route.import} />
-                                    )}
-                                </For>
-                            </Routes>
-                        </main>
-                    </div>
+        <NotificationsProvider>
+            <div class="h-full flex">
+                <Sidebar />
+                <div class="main">
+                    <Header />
+                    <main>
+                        <Routes>
+                            <For each={routes}>
+                                {route => (
+                                    <Route path={route.path} component={route.import} />
+                                )}
+                            </For>
+                        </Routes>
+                    </main>
                 </div>
-            </NotificationsProvider>
-        </StoreProvider>
+            </div>
+        </NotificationsProvider>
     )
 }

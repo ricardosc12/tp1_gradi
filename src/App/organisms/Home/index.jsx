@@ -1,20 +1,16 @@
 import { useStore } from "../../store"
-import style from "./style.module.css"
 import { defaultColumns } from "./components/Table"
-import { Button, Switch } from "@hope-ui/solid"
-import { AddIcon, CheckIcon, TrashIcon } from "@/assets/icons"
+import { Button } from "@hope-ui/solid"
+import { TrashIcon } from "@/assets/icons"
 import Revenue from "./components/Revenue"
 import ActionButton from "@/App/atoms/ActionButton"
 import Table from "@/App/molecules/Table"
-import { createEffect, createMemo, createSignal, onMount } from "solid-js"
-import { PieGraph } from "./components/Graphs/categorias"
+import { createSignal, onMount } from "solid-js"
 import { Graphs } from "./components/Graphs"
 import Modal from "@/App/molecules/Modal"
-import { jsonToXml, xmlToJson } from "@/utils/convert"
+import { downloadXmlFromJson, jsonToXml, xmlToJson } from "@/utils/convert"
 
-
-
-const defaultData = [
+export const defaultData = [
     {
         data: '23/09/2023',
         tipo: "despesa",
@@ -71,7 +67,7 @@ const defaultData = [
         pago: false,
         descricao: "Amazon",
         origem: 'Salário',
-        categoria: 'Entreterimento',
+        categoria: 'Entretenimento',
         valor: 19.90,
         tipo_pagamento: "Cartão"
     },
@@ -81,7 +77,7 @@ const defaultData = [
         pago: false,
         descricao: "Netflix",
         origem: 'Salário',
-        categoria: 'Entreterimento',
+        categoria: 'Entretenimento',
         valor: 59.90,
         tipo_pagamento: "Cartão"
     },
@@ -119,26 +115,13 @@ const defaultData = [
 
 export default function Home() {
 
-    const [dados, { setTransacao, removeTransacao, addTransacao, toggleTransacao }] = useStore()
+    const [dados, { removeTransacao, addTransacao, toggleTransacao }] = useStore()
     const [rowSelection, setRowSelection] = createSignal({})
-
-    onMount(() => {
-        setTransacao(defaultData)
-    })
 
     function handleRemove() {
         removeTransacao(Object.keys(rowSelection()).map(id => Number(id)))
         setRowSelection({})
     }
-
-    const xmlString = jsonToXml(defaultData)
-
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-
-    console.log(xmlString)
-
-    console.log(xmlToJson(xmlDoc))
 
     return (
         <>

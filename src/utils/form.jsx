@@ -6,3 +6,9 @@ export function validateValues(objeto, chaves) {
     }
     return true;
 }
+
+export function isObject(json) {
+    return typeof json === 'object' &&
+        !Array.isArray(json) &&
+        json !== null
+}

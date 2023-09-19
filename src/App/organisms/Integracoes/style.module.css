@@ -1,0 +1,29 @@
+.export {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 1px 2px var(--primary),
+    inset 0px 0px 10px var(--roxinho);
+}
+
+.import {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px var(--primary) dotted;
+    border-radius: 7px;
+    height: 180px;
+    box-shadow: inset 0px 0px 10px var(--roxinho);
+}
+
+.import > svg {
+    font-size: 40px;
+    color: var(--primary);
+}
+
+.import > h5 {
+    color: var(--text-primary2);
+}
