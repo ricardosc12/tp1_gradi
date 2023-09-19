@@ -45,7 +45,7 @@ export default function Integracoes() {
                     const newJson = json.transacoes.transacao
                     newJson.valor = Number(newJson.valor)
                     newJson.pago = newJson.pago === 'false' ? false : true
-                    setTransacao([newJson])
+                    setTransacao([newJson], true)
                     notificationService.show({
                         title: "Carregamento realizado",
                         status: 'success',
@@ -54,7 +54,7 @@ export default function Integracoes() {
                     return
                 }
                 if (!Array.isArray(json.transacoes.transacao)) throw 'Error'
-                setTransacao(json.transacoes.transacao.map(item => ({ ...item, valor: Number(item.valor), pago: item.pago === 'false' ? false : true })))
+                setTransacao(json.transacoes.transacao.map(item => ({ ...item, valor: Number(item.valor), pago: item.pago === 'false' ? false : true })), true)
                 notificationService.show({
                     title: "Carregamento realizado",
                     status: 'success',

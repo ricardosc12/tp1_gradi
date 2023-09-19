@@ -144,7 +144,6 @@ export default function Home() {
             <div class="mt-3">
                 <div class="flex items-center space-x-3 mb-4 bg-roxinho-bg px-3 py-2 rounded-3xl justify-between">
                     <Modal handleAdd={addTransacao} transacoes={dados.transacoes} />
-                    <Button onclick={handleTransacoes}>AWS TESTE</Button>
                     <ActionButton onclick={handleRemove} className="cursor-pointer" color={Object.values(rowSelection()).length ? "vermelhinho" : "cinzinha"} icon={<TrashIcon />} />
                 </div>
                 <div class="overflow-x-auto">

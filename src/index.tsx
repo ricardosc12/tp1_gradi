@@ -3,7 +3,7 @@ import './global.css';
 import { render } from 'solid-js/web';
 import App from './App';
 import { Router } from '@solidjs/router';
-import { HopeProvider } from '@hope-ui/solid';
+import { HopeProvider, NotificationsProvider } from '@hope-ui/solid';
 import { themeConfig } from './theme';
 import { StoreProvider } from './App/store';
 
@@ -16,4 +16,14 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <StoreProvider><Router><HopeProvider config={themeConfig}><App /></HopeProvider></Router></StoreProvider>, root!);
+render(() =>
+  <StoreProvider>
+    <Router>
+      <HopeProvider config={themeConfig}>
+        <NotificationsProvider>
+          <App />
+        </NotificationsProvider>
+      </HopeProvider>
+    </Router>
+  </StoreProvider>
+  , root!);

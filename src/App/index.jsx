@@ -6,8 +6,9 @@ import Home, { defaultData } from "./organisms/Home";
 import Integracoes from "./organisms/Integracoes";
 import { useStore } from "./store";
 import Header from "../layout/header";
-import { NotificationsProvider } from "@hope-ui/solid";
+import { Button, NotificationsProvider, notificationService } from "@hope-ui/solid";
 import ModalLogin, { openModalLogin } from "./molecules/Modal/login";
+import { getUser } from "@/api/transacoes";
 
 export const routes = [
     { path: '/home', icon: HomeIcon, tilte: "Home", import: Home },
@@ -30,7 +31,7 @@ export default function App() {
         }
 
         clearTimeout(timer)
-        
+
         timer = setTimeout(() => {
             if (!dados.auth?.hash) {
                 openModalLogin()
@@ -51,12 +52,30 @@ export default function App() {
     })
 
     onMount(() => {
-        loadAuth()
-        setTransacao(defaultData)
+        loadAuth();
+        (async () => {
+            if (dados.auth.hash) {
+                const resp = await getUser({ hash: dados.auth.hash })
+
+                if (resp) {
+                    const { nome, userId: hash, transacoes } = resp
+                    setTransacao(transacoes)
+                }
+            }
+        })();
+        // setTransacao(defaultData)
     })
 
+    function handleUnauthorized() {
+        notificationService.show({
+            title: "Ação não autorizada",
+            description: "Realize o login primeiro",
+            status: 'warning'
+        })
+    }
+
     return (
-        <NotificationsProvider>
+        <>
             <div class="h-full flex">
                 <Sidebar />
                 <div class="main">
@@ -73,6 +92,11 @@ export default function App() {
                 </div>
             </div>
             <ModalLogin />
-        </NotificationsProvider>
+            <Button onclick={handleUnauthorized} class="hidden" id='unauthorized-action'></Button>
+        </>
     )
+}
+
+export function showUnauthorized() {
+    document.getElementById('unauthorized-action')?.click()
 }

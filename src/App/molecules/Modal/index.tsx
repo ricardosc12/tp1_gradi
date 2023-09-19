@@ -40,7 +40,11 @@ export default function Modal(props) {
             tipos_pagamento: ['Pix', 'Cartão', 'Boleto', 'Dinheiro']
         }
 
-        if (!Array.isArray(props.transacoes)) return data
+        if (!Array.isArray(props.transacoes)) {
+            data.categorias = Object.keys(data.categorias)
+            data.origens = Object.keys(data.origens)
+            return data
+        }
 
         props.transacoes.forEach((item: TransacaoType) => {
             data.categorias[item.categoria] = true
@@ -49,7 +53,7 @@ export default function Modal(props) {
 
         data.categorias = Object.keys(data.categorias)
         data.origens = Object.keys(data.origens)
-
+        
         return data
     })
 
