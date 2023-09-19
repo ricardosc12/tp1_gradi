@@ -1,4 +1,4 @@
-import { onMount } from 'solid-js'
+import { createMemo, onMount } from 'solid-js'
 import { Chart, registerables } from 'chart.js';
 import { Pie } from 'solid-chartjs'
 import { ChartData } from 'chart.js'
@@ -9,16 +9,19 @@ const PieGraph = (props) => {
         Chart.register(...registerables)
     })
 
-    const chartData: ChartData = {
-        labels: props.labels,
-        datasets: [
-            {
-                get data() {
-                    return props.data
+    const chartData = createMemo(() => (
+        {
+            labels: props.labels,
+            datasets: [
+                {
+                    get data() {
+                        return props.data
+                    },
                 },
-            },
-        ],
-    }
+            ],
+        }
+    ))
+    
     const chartOptions = {
         responsive: true,
         scales: {
@@ -42,35 +45,10 @@ const PieGraph = (props) => {
                 position: 'none'
             }
         }
-        // plugins: {
-        //     legend: {
-        //         position: 'none',
-        //     },
-        //     tooltip: {
-        //         enabled: true,
-        //         external: function (context) {
-        //             console.log(context)
-        //         }
-        //     }
-        // },
-        // scales: {
-        //     x: {
-        //         ticks: {
-        //             color: [
-        //                 '#39c763',
-        //                 '#39c763',
-        //                 '#b83232',
-        //                 '#39c763',
-        //                 '#b83232',
-        //                 '#39c763',
-        //             ]
-        //         }
-        //     }
-        // }
     }
 
     return (
-        <Pie data={chartData} options={chartOptions} />
+        <Pie data={chartData()} options={chartOptions} />
     )
 }
 
