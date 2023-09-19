@@ -7,6 +7,7 @@ import vercel from 'vite-plugin-vercel';
 
 export default defineConfig({
   plugins: [
+    // vercel(),
     solidPlugin(),
   ],
   resolve: {
@@ -18,7 +19,7 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    target: 'esnext',
+    target: 'esnext'
     // sourcemap: true
-  },
+  }
 });
