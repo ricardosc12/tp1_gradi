@@ -15,6 +15,8 @@ export const routes = [
 
 export default function App() {
 
+    console.log(import.meta.env)
+
     const [_, { setTransacao }] = useStore()
     const location = useLocation()
     const navigate = useNavigate()
