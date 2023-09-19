@@ -1,4 +1,4 @@
-import { createSignal, createContext, useContext } from "solid-js";
+import { createContext, useContext } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 
 const StoreContext = createContext();
@@ -9,6 +9,10 @@ export function StoreProvider(props) {
             transacoes: {
 
             },
+            auth: {
+                nome: "",
+                hash: ""
+            }
         }
     )
 
@@ -33,9 +37,21 @@ export function StoreProvider(props) {
                 }))
             },
             addTransacao: (payload) => {
-                console.log(payload)
                 setStore(produce((state) => {
                     state.transacoes = [...state.transacoes, payload]
+                }))
+            },
+            setAuth: (payload) => {
+                setStore(produce((state) => {
+                    state.auth = payload
+                    localStorage.setItem('auth', JSON.stringify(payload))
+                }))
+            },
+            loadAuth: () => {
+                setStore(produce((state) => {
+                    if (localStorage.getItem('auth')) {
+                        state.auth = JSON.parse(localStorage.getItem('auth'))
+                    }
                 }))
             },
         }

@@ -9,6 +9,8 @@ import { createSignal, onMount } from "solid-js"
 import { Graphs } from "./components/Graphs"
 import Modal from "@/App/molecules/Modal"
 import { downloadXmlFromJson, jsonToXml, xmlToJson } from "@/utils/convert"
+import { getTransacoes } from "@/api/transacoes"
+import sha256 from 'crypto-js/sha256'
 
 export const defaultData = [
     {
@@ -123,6 +125,12 @@ export default function Home() {
         setRowSelection({})
     }
 
+    function handleTransacoes() {
+        // console.log(sha256("teste" + "admin").toString())
+        // return
+        getTransacoes()
+    }
+
     return (
         <>
             <div class="paper mt-3 flex justify-between">
@@ -136,6 +144,7 @@ export default function Home() {
             <div class="mt-3">
                 <div class="flex items-center space-x-3 mb-4 bg-roxinho-bg px-3 py-2 rounded-3xl justify-between">
                     <Modal handleAdd={addTransacao} transacoes={dados.transacoes} />
+                    <Button onclick={handleTransacoes}>AWS TESTE</Button>
                     <ActionButton onclick={handleRemove} className="cursor-pointer" color={Object.values(rowSelection()).length ? "vermelhinho" : "cinzinha"} icon={<TrashIcon />} />
                 </div>
                 <div class="overflow-x-auto">

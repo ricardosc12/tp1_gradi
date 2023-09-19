@@ -21,7 +21,7 @@ import {
     HStack,
     notificationService
 } from "@hope-ui/solid"
-import { createEffect, createMemo, createSignal } from "solid-js"
+import { createMemo, createSignal } from "solid-js"
 
 export default function Modal(props) {
 
@@ -90,7 +90,7 @@ export default function Modal(props) {
         props.handleAdd(values)
 
     }
-    
+
     return (
         <>
             <Button onclick={onOpen} leftIcon={<AddIcon />}>Nova Transação</Button>

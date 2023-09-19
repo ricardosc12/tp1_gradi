@@ -1,5 +1,6 @@
 .sidebar {
     display: flex;
+    position: relative;
     flex-direction: column;
     background-color: #fbfaff;
     box-shadow: 0px 0px 8px rgba(150, 150, 180, .2);
