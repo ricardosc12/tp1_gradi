@@ -2,11 +2,11 @@ import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
 import path from 'path'
 import vercel from 'vite-plugin-vercel';
+
 // import devtools from 'solid-devtools/vite';
 
 export default defineConfig({
   plugins: [
-    vercel(),
     solidPlugin(),
   ],
   resolve: {
