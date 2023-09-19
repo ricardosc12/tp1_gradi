@@ -40,3 +40,10 @@
 .root[class*="vermelhinho"] > svg {
     color: var(--vermelho-dark);
 }
+.root[class*="cinzinha"] {
+    background-color: var(--cinzinha);
+}
+.root[class*="cinzinha"] > svg {
+    color: var(--cinza);
+}
+

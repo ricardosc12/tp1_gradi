@@ -4,6 +4,17 @@ import { BoletoIcon, CardIcon, MoneyDownIcon, MoneyIcon, MoneyUpIcon, PixIcon } 
 import { Checkbox, Switch } from "@hope-ui/solid";
 import { ColumnDef } from "@tanstack/solid-table"
 
+export type TransacaoType = {
+    data: string,
+    tipo: "despesa" | "receita",
+    pago: boolean,
+    descricao: string,
+    origem: string,
+    categoria: string,
+    valor: number,
+    tipo_pagamento: "Cartão" | "Pix" | "Boleto" | "Dinheiro"
+}
+
 export const Real = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -21,7 +32,7 @@ const tipos_despesa = {
     despesa: MoneyDownIcon
 }
 
-export const defaultColumns: ColumnDef<any>[] = [
+export const defaultColumns = ({ toggleTransacao }): ColumnDef<any>[] => [
     {
         accessorKey: 'data',
         header: ({ table }) => (
@@ -52,7 +63,7 @@ export const defaultColumns: ColumnDef<any>[] = [
     {
         accessorFn: row => row.pago,
         id: 'pago',
-        cell: info => <Switch class="-ml-2" defaultChecked={info.getValue() as boolean} />,
+        cell: info => <Switch onclick={(e) => toggleTransacao(info.row.index, e.target.checked)} class="-ml-2" defaultChecked={info.getValue() as boolean} />,
         header: "Pago",
     },
     {
@@ -93,7 +104,7 @@ export const defaultColumns: ColumnDef<any>[] = [
         cell: info => (
             <div class="flex space-x-3">
                 <span><ActionButton title={info.getValue() as string} size="small" icon={tipos_pagamento[info.getValue() as string]} /></span>
-                <p>{info.getValue() as string}</p>
+                <span>{info.getValue() as string}</span>
             </div>
         ),
         size: 250

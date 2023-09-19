@@ -18,6 +18,26 @@ export const themeConfig: HopeThemeConfig = {
             primary10: "#7e0bfa",
             primary11: "#7603f1",
             primary12: "#7603f1",
+            "roxinho": "#d3b1f8",
+            "roxinho-bg": "#f0e3ff",
+            "roxinho-hover": "#ddc7f5",
+            "primary-hover": "#9e4ff3",
+            "primary-focus": "#5b00bd",
+            "text-primary": "#4a4c4f",
+            "text-primary2": "#6a4494",
+            "paper": "#f7f4f8",
+            "background": "#f0f0fa80",
+            "background-dark": "#e7e7f180",
+            "verde": "#5dff80",
+            "verde-dark": "#188d31",
+            "verdinho": "#a3ffb7",
+            "vermelho": "#ff3232",
+            "vermelho-dark": "#7c0f0f",
+            "vermelhinho": "#ff9595",
+            "cinza": "#707070",
+            "cinza_hover": "#707070BF",
+            "cinzinha": "#F6F6F6",
+            "cinzinha_hover": "#F6F6F6BF",
         }
     },
     components: {
@@ -37,6 +57,9 @@ export const themeConfig: HopeThemeConfig = {
                     },
                     "&[class*='dashed']:hover": {
                         background: 'var(--roxinho-hover)'
+                    },
+                    "&[class*='outline']:hover": {
+                        background: 'var(--roxinho-hover)'
                     }
                 }
             }
@@ -46,6 +69,32 @@ export const themeConfig: HopeThemeConfig = {
                 root: {
                     borderRadius: '30px'
                 }
+            }
+        },
+        Input: {
+            baseStyle: {
+                input: {
+                    borderRadius: '17px',
+                    "&[class*='filled']": {
+                        background: 'var(--bg)'
+                    } 
+                }
+            },
+            defaultProps: {
+                input: {
+                    variant: "filled"
+                }
+            }
+        },
+        Textarea: {
+            baseStyle: {
+                borderRadius: '17px',
+                "&[class*='filled']": {
+                    background: 'var(--bg)'
+                } 
+            },
+            defaultProps: {
+                variant: "filled"
             }
         }
     }

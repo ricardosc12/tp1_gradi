@@ -1,5 +1,6 @@
 .table {
     margin-left: -8px;
+    width: 100% !important;
 }
 .table > thead {
     background-color: var(--background-dark);
@@ -24,6 +25,9 @@
     padding: 4px 16px;
     color: var(--text-primary);
     font-size: 14px;
+}
+.table > tbody > tr[class*="active"] {
+    background-color: var(--roxinho-bg) !important;
 }
 .table > tbody > tr:first-child > td {
     padding-top: 10px;

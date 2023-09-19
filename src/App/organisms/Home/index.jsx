@@ -6,7 +6,12 @@ import { AddIcon, CheckIcon, TrashIcon } from "@/assets/icons"
 import Revenue from "./components/Revenue"
 import ActionButton from "@/App/atoms/ActionButton"
 import Table from "@/App/molecules/Table"
-import { createEffect, createSignal } from "solid-js"
+import { createEffect, createMemo, createSignal, onMount } from "solid-js"
+import { PieGraph } from "./components/Graphs/categorias"
+import { Graphs } from "./components/Graphs"
+import Modal from "@/App/molecules/Modal"
+import { jsonToXml, xmlToJson } from "@/utils/convert"
+
 
 
 const defaultData = [
@@ -114,29 +119,46 @@ const defaultData = [
 
 export default function Home() {
 
-    const { dados } = useStore()
+    const [dados, { setTransacao, removeTransacao, addTransacao, toggleTransacao }] = useStore()
     const [rowSelection, setRowSelection] = createSignal({})
 
-    createEffect(()=>{
-        console.log(rowSelection())
+    onMount(() => {
+        setTransacao(defaultData)
     })
+
+    function handleRemove() {
+        removeTransacao(Object.keys(rowSelection()).map(id => Number(id)))
+        setRowSelection({})
+    }
+
+    const xmlString = jsonToXml(defaultData)
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+    console.log(xmlString)
+
+    console.log(xmlToJson(xmlDoc))
 
     return (
         <>
-            <div class="paper mt-3">
-                <h2>Transações</h2>
-                <h3 class="mt-1">Resultado previsto no mês</h3>
-                <Revenue data={defaultData} />
+            <div class="paper mt-3 flex justify-between">
+                <div class="w-1/2">
+                    <h2>Transações</h2>
+                    <h3 class="mt-1">Resultado previsto no mês</h3>
+                    <Revenue data={dados.transacoes} />
+                </div>
+                <Graphs transacoes={dados.transacoes} />
             </div>
             <div class="mt-3">
-                <div class="flex items-center space-x-3">
-                    <Button leftIcon={<AddIcon />}>Nova Transação</Button>
-                    <ActionButton icon={<TrashIcon />} />
+                <div class="flex items-center space-x-3 mb-4 bg-roxinho-bg px-3 py-2 rounded-3xl justify-between">
+                    <Modal handleAdd={addTransacao} transacoes={dados.transacoes} />
+                    <ActionButton onclick={handleRemove} className="cursor-pointer" color={Object.values(rowSelection()).length ? "vermelhinho" : "cinzinha"} icon={<TrashIcon />} />
                 </div>
                 <div class="overflow-x-auto">
-                    <Table rowSelection={rowSelection} setRowSelection={setRowSelection} data={defaultData} columns={defaultColumns} />
+                    <Table rowSelection={rowSelection} setRowSelection={setRowSelection} data={dados.transacoes} columns={defaultColumns({ toggleTransacao })} />
                 </div>
-            </div >
+            </div>
         </>
 
     )

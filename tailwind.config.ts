@@ -23,9 +23,11 @@ const config: Config = {
       "vermelho": "#ff3232",
       "vermelho-dark": "#7c0f0f",
       "vermelhinho": "#ff9595",
+      "roxinho-bg": "#f0e3ff",
     }
   },
   plugins: [],
+  important: true
 };
 
 export default config;

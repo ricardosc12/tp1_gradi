@@ -24,7 +24,9 @@ export default function Table(props: TableProps) {
     const [sorting, setSorting] = createSignal<SortingState>([])
 
     const table = createSolidTable({
-        data: props.data || [],
+        get data() {
+            return props.data
+        },
         state: {
             get sorting() {
                 return sorting()
@@ -43,7 +45,7 @@ export default function Table(props: TableProps) {
     })
 
     return (
-        <div class="p-2">
+        <div class='pl-3'>
             <table class={style.table} style={{ width: `${table.getCenterTotalSize()}px` }}>
                 <thead>
                     <For each={table.getHeaderGroups()}>
@@ -72,7 +74,7 @@ export default function Table(props: TableProps) {
                 <tbody>
                     <For each={table.getRowModel().rows}>
                         {row => (
-                            <tr>
+                            <tr class={`${row.getIsSelected()?"active":""}`}>
                                 <For each={row.getVisibleCells()}>
                                     {cell => (
                                         <td class='text-left' style={{ width: `${cell.column.getSize()}px` }}>

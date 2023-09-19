@@ -1,0 +1,50 @@
+.select .solid-select-list {
+    max-height: 250px;
+}
+
+.select .solid-select-control {
+    outline: none;
+    border: none;
+    background-color: var(--bg);
+    border-radius: 17px;
+    padding: 8px 10px;
+}
+
+.select .solid-select-placeholder {
+    color: unset;
+    opacity: 0.52;
+    font-weight: 500;
+}
+
+.select .solid-select-list {
+    background-color: var(--bg);
+    border-radius: 17px;
+    opacity: 1;
+    z-index: 99;
+}
+
+.select .solid-select-option:hover {
+    background-color: var(--background-dark);
+}
+
+.select .solid-select-option {
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.select .solid-select-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.select .solid-select-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.select .solid-select-list::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 30px;
+}
+
+.select .solid-select-input {
+    border-radius: 17px;
+}

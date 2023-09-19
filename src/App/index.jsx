@@ -7,6 +7,7 @@ import Dashboard from "./organisms/Dashboard";
 import Integracoes from "./organisms/Integracoes";
 import { StoreProvider } from "./store";
 import Header from "../layout/header";
+import { NotificationsProvider } from "@hope-ui/solid";
 
 export const routes = [
     { path: '/home', icon: HomeIcon, tilte: "Home", import: Home },
@@ -17,21 +18,23 @@ export const routes = [
 export default function App() {
     return (
         <StoreProvider>
-            <div class="h-full flex">
-                <Sidebar />
-                <div class="main">
-                    <Header />
-                    <main>
-                        <Routes>
-                            <For each={routes}>
-                                {route => (
-                                    <Route path={route.path} component={route.import} />
-                                )}
-                            </For>
-                        </Routes>
-                    </main>
+            <NotificationsProvider>
+                <div class="h-full flex">
+                    <Sidebar />
+                    <div class="main">
+                        <Header />
+                        <main>
+                            <Routes>
+                                <For each={routes}>
+                                    {route => (
+                                        <Route path={route.path} component={route.import} />
+                                    )}
+                                </For>
+                            </Routes>
+                        </main>
+                    </div>
                 </div>
-            </div>
+            </NotificationsProvider>
         </StoreProvider>
     )
 }

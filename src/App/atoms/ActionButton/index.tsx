@@ -1,20 +1,24 @@
 import { Tooltip } from '@hope-ui/solid';
 import style from './style.module.css'
+import { splitProps, JSX } from 'solid-js';
 
-interface ActionButtonPros {
+interface ActionButtonPros extends JSX.HTMLAttributes<HTMLDivElement> {
     size?: 'small' | 'medium' | 'large';
     icon?: any;
-    class?: string;
+    className?: string;
     title?: string;
-    color?: "roxinho" | "vermelhinho" | "verdinho"
+    color?: "roxinho" | "vermelhinho" | "verdinho" | "cinzinha"
 }
 
-export default function ActionButton({ icon, size, color, title, ...props }: ActionButtonPros) {
+export default function ActionButton(props: ActionButtonPros) {
+
+    const [local, others] = splitProps(props, ["icon", "size", "color", "title", "className"])
+
     return (
         // @ts-ignore
-        <Tooltip label={title} disabled={!title}>
-            <div class={`${style.root} ${size || ''} ${color || ''}`} {...props}>
-                {icon && icon()}
+        <Tooltip label={local.title} disabled={!local.title}>
+            <div class={`${style.root} ${local.size || ''} ${local.color || ''} ${local.className || ''}`} {...others}>
+                {typeof local.icon == 'function' && local.icon()}
             </div>
         </Tooltip>
     )
