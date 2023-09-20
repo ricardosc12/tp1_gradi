@@ -1,16 +1,12 @@
 import { useStore } from "../../store"
 import { defaultColumns } from "./components/Table"
-import { Button } from "@hope-ui/solid"
 import { TrashIcon } from "@/assets/icons"
 import Revenue from "./components/Revenue"
 import ActionButton from "@/App/atoms/ActionButton"
 import Table from "@/App/molecules/Table"
-import { createSignal, onMount } from "solid-js"
+import { createSignal } from "solid-js"
 import { Graphs } from "./components/Graphs"
 import Modal from "@/App/molecules/Modal"
-import { downloadXmlFromJson, jsonToXml, xmlToJson } from "@/utils/convert"
-import { getTransacoes } from "@/api/transacoes"
-import sha256 from 'crypto-js/sha256'
 
 export const defaultData = [
     {
@@ -123,12 +119,6 @@ export default function Home() {
     function handleRemove() {
         removeTransacao(Object.keys(rowSelection()).map(id => Number(id)))
         setRowSelection({})
-    }
-
-    function handleTransacoes() {
-        // console.log(sha256("teste" + "admin").toString())
-        // return
-        getTransacoes()
     }
 
     return (

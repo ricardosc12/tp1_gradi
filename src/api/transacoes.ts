@@ -1,38 +1,8 @@
-import { DeleteItemCommand, DescribeTableCommand, GetItemCommand, ListTablesCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { DeleteItemCommand, DescribeTableCommand, GetItemCommand, PutItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb"
 import ClientDB from "./aws";
 import sha256 from 'crypto-js/sha256'
 import { TransacaoType } from "@/App/organisms/Home/components/Table";
-
-export async function getTransacoes() {
-
-    const hash: string = hashUser({ login: 'admin', pass: 'admin' })
-
-    // console.log(await describeTable())
-
-    // sha256(props.login + props.pass).toString()
-
-    // console.log(await createUser({ login: 'admin', pass: 'admin', nome: "Admin" }))
-
-    // console.log(await updateUser({
-    //     hash: hash, transacoes: [
-    //         {
-    //             data: '23/09/2023',
-    //             tipo: "despesa",
-    //             pago: false,
-    //             descricao: "Curso - Enem",
-    //             origem: "Salário",
-    //             categoria: 'Estudo',
-    //             valor: 4100,
-    //             tipo_pagamento: "Cartão"
-    //         }
-    //     ]
-    // }))
-
-    // console.log(await deleteUser({ hash: hash }))
-
-    console.log(await getUser({ hash: hash }))
-}
 
 interface updateUserProps {
     hash: string;
@@ -66,13 +36,10 @@ export async function updateUser(props: updateUserProps) {
 
     try {
         const { $metadata } = await client.send(command);
-
         if ($metadata.httpStatusCode !== 200) throw $metadata
-
         return true
 
     } catch (err) {
-        console.log(err)
         return false
     }
 }
